@@ -514,6 +514,12 @@ $dashboard-profile-color: rgb(252,252,252) !default;
 $dot-color: rgb(221, 221, 221) !default;
 $dashboard-course-cover-border: rgb(221, 221, 221) !default;
 
+// dashboard notification messages
+$palette-error-accent: #cb0712;
+$palette-error-back: #feeced;
+$palette-success-accent: #009b00;
+$palette-success-back: #ecfaec;
+
 // course elements
 $content-wrapper-bg: $white !default;
 $course-bg-color: $uxpl-grayscale-x-back !default;
