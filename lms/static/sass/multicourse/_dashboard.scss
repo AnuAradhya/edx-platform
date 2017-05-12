@@ -1420,3 +1420,64 @@ a.fade-cover{
   }
 }
 
+// Dashboard alert messages
+.account-activation {
+
+  .message-copy {
+    position: relative;
+    left: 2em;
+    padding: 1em;
+  }
+
+  .message-title {
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  &.info {
+    color: $palette-brand-accent;
+    background-color: $palette-brand-back;
+    padding: 5px;
+
+    .message-title{
+      margin-bottom: 0;
+    }
+
+    &.icon .message-copy:before {
+      position: absolute;
+      left: -1em;
+      content: "\f05a";  // fa-info-circle
+      font-size: 1.5em;
+      padding: 0 2px;
+      font-family: FontAwesome;
+    }
+  }
+
+  &.success {
+    color: $palette-success-accent;
+    background-color: $palette-success-back;
+
+    &.icon .message-copy:before {
+      position: absolute;
+      left: -1em;
+      content: "\f00c";  // fa-check
+      font-size: 1.5em;
+      padding: 0 2px;
+      font-family: FontAwesome;
+    }
+  }
+
+  &.error {
+    color: $palette-error-accent;
+    background-color: $palette-error-back;
+
+    &.icon .message-copy:before {
+      position: absolute;
+      left: -1em;
+      content: "\f06a";  // fa-exclamation-circle
+      font-size: 1.5em;
+      padding: 0 2px;
+      font-family: FontAwesome;
+    }
+  }
+}
