@@ -80,3 +80,12 @@ def in_preview_mode():
     hostname = get_current_request_hostname()
     preview_lms_base = settings.FEATURES.get('PREVIEW_LMS_BASE', None)
     return bool(preview_lms_base and hostname and hostname.split(':')[0] == preview_lms_base.split(':')[0])
+
+
+def is_preview_menu_disabled(user, course):
+    """
+    If the course is closed to learners, don't show the preview/masquerade menu.
+    """
+    now = datetime.now(UTC())
+    effective_start = adjust_start_date(user, course.days_early_for_beta, course.start, course.id)
+    return not in_preview_mode() and now < effective_start

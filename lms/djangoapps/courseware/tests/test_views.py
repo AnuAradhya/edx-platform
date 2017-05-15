@@ -40,6 +40,7 @@ from certificates.tests.factories import (
 from commerce.models import CommerceConfiguration
 from course_modes.models import CourseMode
 from course_modes.tests.factories import CourseModeFactory
+from courseware.access_utils import is_preview_menu_disabled
 from courseware.model_data import set_score
 from courseware.testutils import RenderXBlockTestMixin
 from courseware.tests.factories import StudentModuleFactory, GlobalStaffFactory
@@ -2116,7 +2117,9 @@ class TestRenderXBlockSelfPaced(TestRenderXBlock):
         SelfPacedConfiguration(enabled=True).save()
 
     def course_options(self):
-        return {'self_paced': True}
+        options = super(TestRenderXBlockSelfPaced, self).course_options()
+        options['self_paced'] = True
+        return options
 
 
 class TestIndexViewCrawlerStudentStateWrites(SharedModuleStoreTestCase):
@@ -2222,3 +2225,20 @@ class EnterpriseConsentTestCase(EnterpriseTestConsentRequired, ModuleStoreTestCa
                 reverse("student_progress", kwargs=dict(course_id=course_id, student_id=str(self.user.id))),
         ):
             self.verify_consent_required(self.client, url)
+
+@ddt.ddt
+class AccessUtilsTestCase(ModuleStoreTestCase):
+    """
+    Test access utilities
+    """
+    @ddt.data(
+        (1, True),
+        (-1, False)
+    )
+    @ddt.unpack
+    def test_preview_disabled(self, start_date_modifier, expected_value):
+        staff_user = AdminFactory()
+        start_date = datetime.now(UTC) + timedelta(days=start_date_modifier)
+        course = CourseFactory.create(start=start_date)
+
+        self.assertEqual(is_preview_menu_disabled(staff_user, course), expected_value)
