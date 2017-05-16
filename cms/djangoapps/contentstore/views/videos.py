@@ -50,26 +50,7 @@ VIDEO_SUPPORTED_FILE_FORMATS = {
     '.mov': 'video/quicktime',
 }
 
-VIDEO_IMAGE_SUPPORTED_FILE_FORMATS = {
-    '.png': 'image/png',
-    '.gif': 'image/gif',
-    '.bmp': 'image/gif',
-    '.jpg': 'image/jpeg',
-    '.jpeg': 'image/jpeg',
-}
-
 VIDEO_UPLOAD_MAX_FILE_SIZE_GB = 5
-VIDEO_IMAGE_MAX_FILE_SIZE_MB = 2
-VIDEO_IMAGE_MAX_BYTES = 2097152
-VIDEO_IMAGE_MIN_BYTES = 100
-
-VIDEO_IMAGE_MAX_WIDTH = 1280
-VIDEO_IMAGE_MAX_HEIGHT = 720
-VIDEO_IMAGE_MIN_WIDTH = 640
-VIDEO_IMAGE_MIN_HEIGHT = 360
-VIDEO_IMAGE_ASPECT_RATIO = 16/9.0
-VIDEO_IMAGE_ASPECT_RATIO_TEXT = '16:9'
-VIDEO_IMAGE_ASPECT_RATIO_ERROR_MARGIN = 0.1
 
 # maximum time for video to remain in upload state
 MAX_UPLOAD_HOURS = 24
@@ -182,40 +163,40 @@ def validate_video_image(image_file):
     """
     error = None
     image_file_width, image_file_height = get_image_dimensions(image_file)
-    image_file_aspect_ratio = abs(image_file_width/float(image_file_height) - VIDEO_IMAGE_ASPECT_RATIO)
+    image_file_aspect_ratio = abs(image_file_width/float(image_file_height) - settings.VIDEO_IMAGE_ASPECT_RATIO)
 
     if not (hasattr(image_file, 'name') and hasattr(image_file, 'content_type') and hasattr(image_file, 'size')):
         error = _("The selected image must contain 'name', 'content_type' and 'size'.")
-    elif image_file.content_type not in VIDEO_IMAGE_SUPPORTED_FILE_FORMATS.values():
-        error = 'The selected image contains unsupported content_type.'
-    elif image_file.size > VIDEO_IMAGE_MAX_BYTES:
-        error = _('The selected image must be smaller than {image_max_size} MB').format(
-        image_max_size=VIDEO_IMAGE_MAX_FILE_SIZE_MB
+    elif image_file.content_type not in settings.VIDEO_IMAGE_SUPPORTED_FILE_FORMATS.values():
+        error = _('The selected image contains unsupported content_type.')
+    elif image_file.size > settings.VIDEO_IMAGE_SETTINGS['VIDEO_IMAGE_MAX_BYTES']:
+        error = _('The selected image must be smaller than {image_max_size} MB.').format(
+        image_max_size=settings.VIDEO_IMAGE_MAX_FILE_SIZE_MB
     )
-    elif image_file.size < VIDEO_IMAGE_MIN_BYTES:
+    elif image_file.size < settings.VIDEO_IMAGE_SETTINGS['VIDEO_IMAGE_MIN_BYTES']:
         error = _('The selected image must be larger than {image_min_size} bytes').format(
-        image_min_size=VIDEO_IMAGE_MIN_BYTES
+        image_min_size=settings.VIDEO_IMAGE_SETTINGS['VIDEO_IMAGE_MIN_BYTES']
     )
-    elif image_file_width > VIDEO_IMAGE_MAX_WIDTH or image_file_height > VIDEO_IMAGE_MAX_HEIGHT:
+    elif image_file_width > settings.VIDEO_IMAGE_MAX_WIDTH or image_file_height > settings.VIDEO_IMAGE_MAX_HEIGHT:
         error = _('The selected image size is {image_file_width}x{image_file_height}. '
-                'The maximum allowed image size is {image_file_max_width}x{image_file_max_height}.'.format(
+                'The maximum allowed image size is {image_file_max_width}x{image_file_max_height}.').format(
             image_file_width=image_file_width,
             image_file_height=image_file_height,
-            image_file_max_width=VIDEO_IMAGE_MAX_WIDTH,
-            image_file_max_height=VIDEO_IMAGE_MAX_HEIGHT
-        ))
-    elif image_file_width < VIDEO_IMAGE_MIN_WIDTH or image_file_height < VIDEO_IMAGE_MIN_HEIGHT:
+            image_file_max_width=settings.VIDEO_IMAGE_MAX_WIDTH,
+            image_file_max_height=settings.VIDEO_IMAGE_MAX_HEIGHT
+        )
+    elif image_file_width < settings.VIDEO_IMAGE_MIN_WIDTH or image_file_height < settings.VIDEO_IMAGE_MIN_HEIGHT:
         error = _('The selected image size is {image_file_width}x{image_file_height}. '
-                'The minimum allowed image size is {image_file_min_width}x{image_file_min_height.}'.format(
+                'The minimum allowed image size is {image_file_min_width}x{image_file_min_height}.').format(
             image_file_width=image_file_width,
             image_file_height=image_file_height,
-            image_file_min_width=VIDEO_IMAGE_MIN_WIDTH,
-            image_file_min_height=VIDEO_IMAGE_MIN_HEIGHT
-        ))
-    elif image_file_aspect_ratio > VIDEO_IMAGE_ASPECT_RATIO_ERROR_MARGIN:
-        error = _('The selected image must have aspect ratio of {video_image_aspect_ratio_text}'.format(
-            video_image_aspect_ratio_text=VIDEO_IMAGE_ASPECT_RATIO_TEXT
-        ))
+            image_file_min_width=settings.VIDEO_IMAGE_MIN_WIDTH,
+            image_file_min_height=settings.VIDEO_IMAGE_MIN_HEIGHT
+        )
+    elif image_file_aspect_ratio > settings.VIDEO_IMAGE_ASPECT_RATIO_ERROR_MARGIN:
+        error = _('The selected image must have aspect ratio of {video_image_aspect_ratio_text}.').format(
+            video_image_aspect_ratio_text=settings.VIDEO_IMAGE_ASPECT_RATIO_TEXT
+        )
     else:
         try:
             image_file.name.encode('ascii')
@@ -231,7 +212,7 @@ def validate_video_image(image_file):
 @require_POST
 def video_images_handler(request, course_key_string, edx_video_id=None):
     if 'file' not in request.FILES:
-        return JsonResponse({"error": _(u'No file provided for video image')}, status=400)
+        return JsonResponse({'error': _(u'No file provided for video image')}, status=400)
     image_file = request.FILES['file']
     error = validate_video_image(image_file)
     if error:
