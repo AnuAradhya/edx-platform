@@ -44,8 +44,11 @@ function(_) {
          *                            // video format of the source. Supported
          *                            // video formats are: 'mp4', 'webm', and
          *                            // 'ogg'.
+         *        poster:             Video poster URL
          *
-         *          events: {         // Object's properties identify the
+         *        browserIsSafari:    Flag to tell if current browser is Safari
+         *
+         *        events: {           // Object's properties identify the
          *                            // events that the API fires, and the
          *                            // functions (event listeners) that the
          *                            // API will call when those events occur.

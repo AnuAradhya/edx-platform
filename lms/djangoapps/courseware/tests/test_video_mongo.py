@@ -55,33 +55,33 @@ class TestVideoYouTube(TestVideo):
             'handout': None,
             'id': self.item_descriptor.location.html_id(),
             'metadata': json.dumps(OrderedDict({
-                "saveStateUrl": self.item_descriptor.xmodule_runtime.ajax_url + "/save_user_state",
-                "autoplay": False,
-                "streams": "0.75:jNCf2gIqpeE,1.00:ZwkTiUPN0mg,1.25:rsq9auxASqI,1.50:kMyNdzVHHgg",
-                "sub": "a_sub_file.srt.sjson",
-                "sources": sources,
-                "poster": None,
-                "captionDataDir": None,
-                "showCaptions": "true",
-                "generalSpeed": 1.0,
-                "speed": None,
-                "savedVideoPosition": 0.0,
-                "start": 3603.0,
-                "end": 3610.0,
-                "transcriptLanguage": "en",
-                "transcriptLanguages": OrderedDict({"en": "English", "uk": u"Українська"}),
-                "ytTestTimeout": 1500,
-                "ytApiUrl": "https://www.youtube.com/iframe_api",
-                "ytMetadataUrl": "https://www.googleapis.com/youtube/v3/videos/",
-                "ytKey": None,
-                "transcriptTranslationUrl": self.item_descriptor.xmodule_runtime.handler_url(
+                'saveStateUrl': self.item_descriptor.xmodule_runtime.ajax_url + '/save_user_state',
+                'autoplay': False,
+                'streams': '0.75:jNCf2gIqpeE,1.00:ZwkTiUPN0mg,1.25:rsq9auxASqI,1.50:kMyNdzVHHgg',
+                'sub': 'a_sub_file.srt.sjson',
+                'sources': sources,
+                'poster': None,
+                'captionDataDir': None,
+                'showCaptions': 'true',
+                'generalSpeed': 1.0,
+                'speed': None,
+                'savedVideoPosition': 0.0,
+                'start': 3603.0,
+                'end': 3610.0,
+                'transcriptLanguage': 'en',
+                'transcriptLanguages': OrderedDict({'en': 'English', 'uk': u'Українська'}),
+                'ytTestTimeout': 1500,
+                'ytApiUrl': 'https://www.youtube.com/iframe_api',
+                'ytMetadataUrl': 'https://www.googleapis.com/youtube/v3/videos/',
+                'ytKey': None,
+                'transcriptTranslationUrl': self.item_descriptor.xmodule_runtime.handler_url(
                     self.item_descriptor, 'transcript', 'translation/__lang__'
                 ).rstrip('/?'),
-                "transcriptAvailableTranslationsUrl": self.item_descriptor.xmodule_runtime.handler_url(
+                'transcriptAvailableTranslationsUrl': self.item_descriptor.xmodule_runtime.handler_url(
                     self.item_descriptor, 'transcript', 'available_translations'
                 ).rstrip('/?'),
-                "autohideHtml5": False,
-                "recordedYoutubeIsAvailable": True,
+                'autohideHtml5': False,
+                'recordedYoutubeIsAvailable': True,
             })),
             'track': None,
             'transcript_download_format': 'srt',
@@ -135,33 +135,33 @@ class TestVideoNonYouTube(TestVideo):
             'handout': None,
             'id': self.item_descriptor.location.html_id(),
             'metadata': json.dumps(OrderedDict({
-                "saveStateUrl": self.item_descriptor.xmodule_runtime.ajax_url + "/save_user_state",
-                "autoplay": False,
-                "streams": "1.00:3_yD_cEKoCk",
-                "sub": "a_sub_file.srt.sjson",
-                "sources": sources,
-                "poster": None,
-                "captionDataDir": None,
-                "showCaptions": "true",
-                "generalSpeed": 1.0,
-                "speed": None,
-                "savedVideoPosition": 0.0,
-                "start": 3603.0,
-                "end": 3610.0,
-                "transcriptLanguage": "en",
-                "transcriptLanguages": OrderedDict({"en": "English"}),
-                "ytTestTimeout": 1500,
-                "ytApiUrl": "https://www.youtube.com/iframe_api",
-                "ytMetadataUrl": "https://www.googleapis.com/youtube/v3/videos/",
-                "ytKey": None,
-                "transcriptTranslationUrl": self.item_descriptor.xmodule_runtime.handler_url(
+                'saveStateUrl': self.item_descriptor.xmodule_runtime.ajax_url + '/save_user_state',
+                'autoplay': False,
+                'streams': '1.00:3_yD_cEKoCk',
+                'sub': 'a_sub_file.srt.sjson',
+                'sources': sources,
+                'poster': None,
+                'captionDataDir': None,
+                'showCaptions': 'true',
+                'generalSpeed': 1.0,
+                'speed': None,
+                'savedVideoPosition': 0.0,
+                'start': 3603.0,
+                'end': 3610.0,
+                'transcriptLanguage': 'en',
+                'transcriptLanguages': OrderedDict({'en': 'English'}),
+                'ytTestTimeout': 1500,
+                'ytApiUrl': 'https://www.youtube.com/iframe_api',
+                'ytMetadataUrl': 'https://www.googleapis.com/youtube/v3/videos/',
+                'ytKey': None,
+                'transcriptTranslationUrl': self.item_descriptor.xmodule_runtime.handler_url(
                     self.item_descriptor, 'transcript', 'translation/__lang__'
                 ).rstrip('/?'),
-                "transcriptAvailableTranslationsUrl": self.item_descriptor.xmodule_runtime.handler_url(
+                'transcriptAvailableTranslationsUrl': self.item_descriptor.xmodule_runtime.handler_url(
                     self.item_descriptor, 'transcript', 'available_translations'
                 ).rstrip('/?'),
-                "autohideHtml5": False,
-                "recordedYoutubeIsAvailable": True,
+                'autohideHtml5': False,
+                'recordedYoutubeIsAvailable': True,
             })),
             'track': None,
             'transcript_download_format': 'srt',
@@ -192,33 +192,33 @@ class TestGetHtmlMethod(BaseTestXmodule):
         super(TestGetHtmlMethod, self).setUp()
         self.setup_course()
         self.default_metadata_dict = OrderedDict({
-            "saveStateUrl": "",
-            "autoplay": settings.FEATURES.get('AUTOPLAY_VIDEOS', True),
-            "streams": "1.00:3_yD_cEKoCk",
-            "sub": "a_sub_file.srt.sjson",
-            "sources": '[]',
-            "poster": None,
-            "captionDataDir": None,
-            "showCaptions": "true",
-            "generalSpeed": 1.0,
-            "speed": None,
-            "savedVideoPosition": 0.0,
-            "start": 3603.0,
-            "end": 3610.0,
-            "transcriptLanguage": "en",
-            "transcriptLanguages": OrderedDict({"en": "English"}),
-            "ytTestTimeout": 1500,
-            "ytApiUrl": "https://www.youtube.com/iframe_api",
-            "ytMetadataUrl": "https://www.googleapis.com/youtube/v3/videos/",
-            "ytKey": None,
-            "transcriptTranslationUrl": self.item_descriptor.xmodule_runtime.handler_url(
+            'saveStateUrl': '',
+            'autoplay': settings.FEATURES.get('AUTOPLAY_VIDEOS', True),
+            'streams': '1.00:3_yD_cEKoCk',
+            'sub': 'a_sub_file.srt.sjson',
+            'sources': '[]',
+            'poster': None,
+            'captionDataDir': None,
+            'showCaptions': 'true',
+            'generalSpeed': 1.0,
+            'speed': None,
+            'savedVideoPosition': 0.0,
+            'start': 3603.0,
+            'end': 3610.0,
+            'transcriptLanguage': 'en',
+            'transcriptLanguages': OrderedDict({'en': 'English'}),
+            'ytTestTimeout': 1500,
+            'ytApiUrl': 'https://www.youtube.com/iframe_api',
+            'ytMetadataUrl': 'https://www.googleapis.com/youtube/v3/videos/',
+            'ytKey': None,
+            'transcriptTranslationUrl': self.item_descriptor.xmodule_runtime.handler_url(
                 self.item_descriptor, 'transcript', 'translation/__lang__'
             ).rstrip('/?'),
-            "transcriptAvailableTranslationsUrl": self.item_descriptor.xmodule_runtime.handler_url(
+            'transcriptAvailableTranslationsUrl': self.item_descriptor.xmodule_runtime.handler_url(
                 self.item_descriptor, 'transcript', 'available_translations'
             ).rstrip('/?'),
-            "autohideHtml5": False,
-            "recordedYoutubeIsAvailable": True,
+            'autohideHtml5': False,
+            'recordedYoutubeIsAvailable': True,
         })
 
     def test_get_html_track(self):
@@ -1479,13 +1479,13 @@ class TestVideoWithBumper(TestVideo):
         Test content with rendered bumper metadata.
         """
         get_url_for_profiles.return_value = {
-            "desktop_mp4": "http://test_bumper.mp4",
-            "desktop_webm": "",
+            'desktop_mp4': 'http://test_bumper.mp4',
+            'desktop_webm': '',
         }
 
         get_bumper_settings.return_value = {
-            "video_id": "edx_video_id",
-            "transcripts": {},
+            'video_id': 'edx_video_id',
+            'transcripts': {},
         }
 
         is_bumper_enabled.return_value = True
@@ -1497,17 +1497,17 @@ class TestVideoWithBumper(TestVideo):
             'license': None,
             'bumper_metadata': json.dumps(OrderedDict({
                 'saveStateUrl': self.item_descriptor.xmodule_runtime.ajax_url + '/save_user_state',
-                "showCaptions": "true",
-                "sources": ["http://test_bumper.mp4"],
+                'showCaptions': 'true',
+                'sources': ['http://test_bumper.mp4'],
                 'streams': '',
-                "transcriptLanguage": "en",
-                "transcriptLanguages": {"en": "English"},
-                "transcriptTranslationUrl": video_utils.set_query_parameter(
+                'transcriptLanguage': 'en',
+                'transcriptLanguages': {'en': 'English'},
+                'transcriptTranslationUrl': video_utils.set_query_parameter(
                     self.item_descriptor.xmodule_runtime.handler_url(
                         self.item_descriptor, 'transcript', 'translation/__lang__'
                     ).rstrip('/?'), 'is_bumper', 1
                 ),
-                "transcriptAvailableTranslationsUrl": video_utils.set_query_parameter(
+                'transcriptAvailableTranslationsUrl': video_utils.set_query_parameter(
                     self.item_descriptor.xmodule_runtime.handler_url(
                         self.item_descriptor, 'transcript', 'available_translations'
                     ).rstrip('/?'), 'is_bumper', 1
@@ -1520,33 +1520,33 @@ class TestVideoWithBumper(TestVideo):
             'handout': None,
             'id': self.item_descriptor.location.html_id(),
             'metadata': json.dumps(OrderedDict({
-                "saveStateUrl": self.item_descriptor.xmodule_runtime.ajax_url + "/save_user_state",
-                "autoplay": False,
-                "streams": "0.75:jNCf2gIqpeE,1.00:ZwkTiUPN0mg,1.25:rsq9auxASqI,1.50:kMyNdzVHHgg",
-                "sub": "a_sub_file.srt.sjson",
-                "sources": sources,
-                "poster": None,
-                "captionDataDir": None,
-                "showCaptions": "true",
-                "generalSpeed": 1.0,
-                "speed": None,
-                "savedVideoPosition": 0.0,
-                "start": 3603.0,
-                "end": 3610.0,
-                "transcriptLanguage": "en",
-                "transcriptLanguages": OrderedDict({"en": "English", "uk": u"Українська"}),
-                "ytTestTimeout": 1500,
-                "ytApiUrl": "https://www.youtube.com/iframe_api",
-                "ytMetadataUrl": "https://www.googleapis.com/youtube/v3/videos/",
-                "ytKey": None,
-                "transcriptTranslationUrl": self.item_descriptor.xmodule_runtime.handler_url(
+                'saveStateUrl': self.item_descriptor.xmodule_runtime.ajax_url + '/save_user_state',
+                'autoplay': False,
+                'streams': '0.75:jNCf2gIqpeE,1.00:ZwkTiUPN0mg,1.25:rsq9auxASqI,1.50:kMyNdzVHHgg',
+                'sub': 'a_sub_file.srt.sjson',
+                'sources': sources,
+                'poster': None,
+                'captionDataDir': None,
+                'showCaptions': 'true',
+                'generalSpeed': 1.0,
+                'speed': None,
+                'savedVideoPosition': 0.0,
+                'start': 3603.0,
+                'end': 3610.0,
+                'transcriptLanguage': 'en',
+                'transcriptLanguages': OrderedDict({'en': 'English', 'uk': u'Українська'}),
+                'ytTestTimeout': 1500,
+                'ytApiUrl': 'https://www.youtube.com/iframe_api',
+                'ytMetadataUrl': 'https://www.googleapis.com/youtube/v3/videos/',
+                'ytKey': None,
+                'transcriptTranslationUrl': self.item_descriptor.xmodule_runtime.handler_url(
                     self.item_descriptor, 'transcript', 'translation/__lang__'
                 ).rstrip('/?'),
-                "transcriptAvailableTranslationsUrl": self.item_descriptor.xmodule_runtime.handler_url(
+                'transcriptAvailableTranslationsUrl': self.item_descriptor.xmodule_runtime.handler_url(
                     self.item_descriptor, 'transcript', 'available_translations'
                 ).rstrip('/?'),
-                "autohideHtml5": False,
-                "recordedYoutubeIsAvailable": True,
+                'autohideHtml5': False,
+                'recordedYoutubeIsAvailable': True,
             })),
             'track': None,
             'transcript_download_format': 'srt',
@@ -1555,8 +1555,8 @@ class TestVideoWithBumper(TestVideo):
                 {'display_name': 'Text (.txt) file', 'value': 'txt'}
             ],
             'poster': json.dumps(OrderedDict({
-                "url": "http://img.youtube.com/vi/ZwkTiUPN0mg/0.jpg",
-                "type": "youtube"
+                'url': 'http://img.youtube.com/vi/ZwkTiUPN0mg/0.jpg',
+                'type': 'youtube'
             }))
         }
 
