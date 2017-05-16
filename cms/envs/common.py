@@ -866,6 +866,10 @@ INSTALLED_APPS = (
 
     # For CMS
     'contentstore',
+
+    # Contentstore Signal Handlers
+    'cms.djangoapps.contentstore.signals.apps.ContentstoreConfig',
+
     'openedx.core.djangoapps.contentserver',
     'course_creators',
     'openedx.core.djangoapps.external_auth',
