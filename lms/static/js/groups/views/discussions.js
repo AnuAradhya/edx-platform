@@ -10,7 +10,7 @@
 
             var DiscussionsView = Backbone.View.extend({
                 events: {
-                    'change .division-scheme': 'divisionSchemeChanged'
+                    'click .division-scheme': 'divisionSchemeChanged'
                 },
 
                 initialize: function(options) {
@@ -54,7 +54,6 @@
                 divisionSchemeChanged: function() {
                     var selectedScheme = this.$('input[name="division-scheme"]:checked').val(),
                         topicNav = this.$('.topic-division-nav');
-
                     if (selectedScheme === 'none') {
                         topicNav.addClass(hiddenClass);
                     } else {
