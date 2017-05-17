@@ -11,7 +11,7 @@ class ContentstoreConfig(AppConfig):
     """
     Application Configuration for Grades.
     """
-    name = u'cms.djangoapps.contentstore.signals'
+    name = u'cms.djangoapps.contentstore'
 
     def ready(self):
         """
@@ -19,4 +19,4 @@ class ContentstoreConfig(AppConfig):
         """
         # Can't import models at module level in AppConfigs, and models get
         # included from the signal handlers
-        from . import handlers  # pylint: disable=unused-variable
+        from .signals import handlers  # pylint: disable=unused-variable
