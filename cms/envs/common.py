@@ -865,7 +865,7 @@ INSTALLED_APPS = (
     'django_nose',
 
     # For CMS
-    # 'contentstore',
+    'contentstore',
     #
     # # Contentstore Signal Handlers
     'cms.djangoapps.contentstore.apps.ContentstoreConfig',
