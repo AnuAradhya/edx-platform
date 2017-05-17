@@ -40,6 +40,8 @@
                     this.supportURL = data.supportURL;
                     this.createAccountOption = data.createAccountOption;
 
+                    this.accountActivationMessages = data.accountActivationMessages;
+
                     this.listenTo(this.model, 'sync', this.saveSuccess);
                     this.listenTo(this.resetModel, 'sync', this.resetEmail);
                 },
@@ -85,6 +87,9 @@
                          */
                         this.model.save();
                     }
+
+                    // Display account activation success or error messages.
+                    this.renderAccountActivationMessages();
                 },
 
                 forgotPassword: function(event) {
@@ -178,6 +183,17 @@
                     this.renderFormFeedback(this.formStatusTpl, {
                         jsHook: this.authWarningJsHook,
                         message: message
+                    });
+                },
+
+                renderAccountActivationMessages: function() {
+                    _.each(this.accountActivationMessages, this.renderAccountActivationMessage, this);
+                },
+
+                renderAccountActivationMessage: function(message) {
+                    this.renderFormFeedback(this.formStatusTpl, {
+                        jsHook: message.tags,
+                        message: HtmlUtils.HTML(message.message)
                     });
                 },
 

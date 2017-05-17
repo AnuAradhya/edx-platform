@@ -2304,18 +2304,32 @@ def activate_account(request, key):
             _(
                 'Something went wrong, please <a href="{support_url}">contact support</a> to resolve this issue.'
             ).format(support_url=configuration_helpers.get_value('SUPPORT_SITE_LINK', settings.SUPPORT_SITE_LINK)),
-            extra_tags='account-activation'
+            extra_tags='account-activation icon'
         )
     else:
         if not registration.user.is_active:
             registration.activate()
-            # Add account activation success message for display later
-            messages.success(
-                request, _('You successfully activated your account.'), extra_tags='account-activation',
-            )
+
+            if request.user.is_authenticated():
+                # Add account activation success message for display later
+                messages.success(
+                    request, _('You have successfully activated your account.'), extra_tags='account-activation icon',
+                )
+            else:
+                # Message for anonymous user, this message will be displayed on login page.
+                messages.success(
+                    request,
+                    _('{html_start}Success! You have activated your account.{html_end}'
+                      ' You will now receive email updates and alerts from us related '
+                      'to the courses you are enrolled in. Sign In to continue.').format(
+                        html_start='<p class="message-title">',
+                        html_end='</p>',
+                    ),
+                    extra_tags='account-activation',
+                )
         else:
             messages.success(
-                request, _('This account has already been activated.'), extra_tags='account-activation',
+                request, _('This account has already been activated.'), extra_tags='account-activation icon',
             )
 
         # Enroll student in any pending courses he/she may have if auto_enroll flag is set
