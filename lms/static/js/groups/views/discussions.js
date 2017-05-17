@@ -31,20 +31,20 @@
                     return [
                         {
                             key: 'none',
-                            displayName: gettext('None'),
-                            descriptiveText: gettext('All discussions are unified'),
+                            displayName: gettext('Not divided'),
+                            descriptiveText: gettext('Discussions are unified; all learners interact with posts from other learners, regardless of the group they are in.'),
                             selected: false
                         },
                         {
                             key: 'enrollment_track',
-                            displayName: gettext('Enrollment Track'),
-                            descriptiveText: gettext('Divide selected discussions by enrollment track'),
+                            displayName: gettext('Enrollment Tracks'),
+                            descriptiveText: gettext('Use enrollment tracks as the basis for dividing discussions. All learners, regardless of their enrollment track, see the same discussion topics, but within divided topics, only learners who are in the same enrollment track see and respond to each others’ posts.'),
                             selected: false
                         },
                         {
                             key: 'cohort',
-                            displayName: gettext('Cohort'),
-                            descriptiveText: gettext('Divide selected discussions by cohort'),
+                            displayName: gettext('Cohorts'),
+                            descriptiveText: gettext('Use cohorts as the basis for dividing discussions. All learners, regardless of cohort, see the same discussion topics, but within divided topics, only members of the same cohort see and respond to each others’ posts. '),
                             selected: true
                         }
 
@@ -53,11 +53,34 @@
 
                 divisionSchemeChanged: function() {
                     var selectedScheme = this.$('input[name="division-scheme"]:checked').val(),
-                        topicNav = this.$('.topic-division-nav');
+                        topicNav = this.$('.topic-division-nav'),
+                        messageSpan = this.$('.division-scheme-message');
+
+                    this.hideTopicNav(selectedScheme, topicNav);
+                    this.showSelectMessage(selectedScheme, messageSpan);
+
+                },
+
+                hideTopicNav: function(selectedScheme, topicNav) {
                     if (selectedScheme === 'none') {
                         topicNav.addClass(hiddenClass);
                     } else {
                         topicNav.removeClass(hiddenClass);
+                    }
+                },
+
+                showSelectMessage: function(selectedScheme, messageSpan) {
+                    // TODO need to call the proper template text based on selectedScheme
+                    switch (selectedScheme) {
+                        case 'none':
+                            messageSpan.text(gettext('Discussion topics in the course are not divided.'));
+                            break;
+                        case 'enrollment_track':
+                            messageSpan.text(gettext('Any divided discussion topics are divided based on enrollment track.'));
+                            break;
+                        case 'cohort':
+                            messageSpan.text(gettext('Any divided discussion topics are divided based on cohort.'));
+                            break;
                     }
                 },
 
