@@ -59,7 +59,7 @@ from enrollment.api import add_enrollment
 from course_modes.models import CourseMode
 from courseware.access import has_access, has_ccx_coach_role
 from courseware.access_response import StartDateError
-from courseware.access_utils import in_preview_mode, is_preview_menu_disabled
+from courseware.access_utils import in_preview_mode, is_course_open_for_learner
 from courseware.courses import (
     get_courses,
     get_course,
@@ -374,11 +374,11 @@ def course_info(request, course_id):
         if SelfPacedConfiguration.current().enable_course_home_improvements:
             context['last_accessed_courseware_url'] = get_last_accessed_courseware(course, request, user)
 
-        if is_preview_menu_disabled(user, course):
+        if not is_course_open_for_learner(user, course):
             # Disable student view button if user is staff and
             # course is not yet visible to students.
             context['disable_student_access'] = True
-            context['supporst_preview_menu'] = False
+            context['supports_preview_menu'] = False
 
         if CourseEnrollment.is_enrolled(request.user, course.id):
             inject_coursetalk_keys_into_context(context, course_key)
@@ -513,7 +513,7 @@ class CourseTabView(EdxFragmentView):
         else:
             masquerade = None
 
-        if course and is_preview_menu_disabled(request.user, course):
+        if course and not is_course_open_for_learner(request.user, course):
             # Disable student view button if user is staff and
             # course is not yet visible to students.
             supports_preview_menu = False

@@ -82,10 +82,10 @@ def in_preview_mode():
     return bool(preview_lms_base and hostname and hostname.split(':')[0] == preview_lms_base.split(':')[0])
 
 
-def is_preview_menu_disabled(user, course):
+def is_course_open_for_learner(user, course):
     """
-    If the course is closed to learners, don't show the preview/masquerade menu.
+    Check if the course is open for learners based on the start date.
     """
     now = datetime.now(UTC())
     effective_start = adjust_start_date(user, course.days_early_for_beta, course.start, course.id)
-    return not in_preview_mode() and now < effective_start
+    return not(not in_preview_mode() and now < effective_start)

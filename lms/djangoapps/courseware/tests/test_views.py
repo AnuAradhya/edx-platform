@@ -40,7 +40,7 @@ from certificates.tests.factories import (
 from commerce.models import CommerceConfiguration
 from course_modes.models import CourseMode
 from course_modes.tests.factories import CourseModeFactory
-from courseware.access_utils import is_preview_menu_disabled
+from courseware.access_utils import is_course_open_for_learner
 from courseware.model_data import set_score
 from courseware.testutils import RenderXBlockTestMixin
 from courseware.tests.factories import StudentModuleFactory, GlobalStaffFactory
@@ -2226,14 +2226,15 @@ class EnterpriseConsentTestCase(EnterpriseTestConsentRequired, ModuleStoreTestCa
         ):
             self.verify_consent_required(self.client, url)
 
+
 @ddt.ddt
 class AccessUtilsTestCase(ModuleStoreTestCase):
     """
     Test access utilities
     """
     @ddt.data(
-        (1, True),
-        (-1, False)
+        (1, False),
+        (-1, True)
     )
     @ddt.unpack
     def test_preview_disabled(self, start_date_modifier, expected_value):
@@ -2241,4 +2242,4 @@ class AccessUtilsTestCase(ModuleStoreTestCase):
         start_date = datetime.now(UTC) + timedelta(days=start_date_modifier)
         course = CourseFactory.create(start=start_date)
 
-        self.assertEqual(is_preview_menu_disabled(staff_user, course), expected_value)
+        self.assertEqual(is_course_open_for_learner(staff_user, course), expected_value)
